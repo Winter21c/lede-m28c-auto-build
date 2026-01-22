@@ -1,5 +1,5 @@
 #!/bin/sh
-is_first_boot=`uci -q get zz_config.@status[0].first_boot`
+is_first_boot=`uci -q get winter_config.@status[0].first_boot`
 if test $is_first_boot -gt 0; then
 #echo -e "guwenchen202101\nguwenchen202101" | (passwd root)
 uci set system.@system[0].hostname='WinterNetM28C'
@@ -22,8 +22,8 @@ uci set wireless.default_radio0.key='guwenchen202101'
 uci commit wireless
 /etc/init.d/network reload
 wifi
-uci -q set zz_config.@status[0].first_boot=0
-uci commit zz_config
+uci -q set winter_config.@status[0].first_boot=0
+uci commit winter_config
 fi
 
 sed -i "s?set wireless\.default_radio\${devidx}\.ssid=LEDE?set wireless\.default_radio\${devidx}\.ssid=\'WinterNetM28C\'?g" /lib/wifi/mac80211.sh
